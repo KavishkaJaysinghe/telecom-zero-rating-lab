@@ -120,4 +120,10 @@ This is a defensive, closed-loop teaching lab, for validating detection logic on
 
 ---
 
+## License
+
+Released under the [MIT License](LICENSE). The educational/defensive scope and responsible-use terms in the README and sub-lab docs still apply.
+
+---
+
 *Simplified reference model based on public 3GPP concepts. Not affiliated with, and not a description of, any operator's production system.*
