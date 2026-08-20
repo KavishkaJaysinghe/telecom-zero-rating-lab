@@ -1,0 +1,16 @@
+# =============================================================================
+#  sni-tunnel-lab — dependencies
+#  LAB / EDUCATIONAL — closed-loop SNI-spoofing tunnel reference model.
+# =============================================================================
+#
+#  RUNTIME: none. Both the VPS endpoint and the Windows client use only the
+#  Python 3.10+ standard library (socket, ssl, threading, http.server). You can
+#  run the whole lab with a bare Python install.
+#
+#  OPTIONAL: 'cryptography' is needed ONLY if you generate the lab certificate
+#  with `python vps_tunnel_server.py --autocert` instead of `./setup_certs.sh`.
+#  On the Linux VPS the openssl-based setup_certs.sh is the normal path and
+#  needs nothing from pip.
+# =============================================================================
+
+cryptography>=42 ; python_version >= "3.10"

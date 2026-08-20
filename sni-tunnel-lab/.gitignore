@@ -1,0 +1,30 @@
+# =============================================================================
+#  sni-tunnel-lab — .gitignore
+# =============================================================================
+
+# Lab TLS material — a private key must never be committed, even a throwaway.
+certs/
+*.pem
+*.key
+
+# Packet captures may contain lab traffic; regenerate rather than commit.
+*.pcap
+bypass_capture.pcap
+
+# Run artefacts
+logs/
+_*.out
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db

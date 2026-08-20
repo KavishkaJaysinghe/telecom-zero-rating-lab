@@ -1,0 +1,25 @@
+# =============================================================================
+#  zero-rating-detection-lab — dependencies
+#  LAB / EDUCATIONAL — defensive fraud detection reference model.
+# =============================================================================
+#
+#  Install with:   pip install -r requirements.txt
+#  Python 3.10+ required (the code uses PEP 604 `X | Y` type syntax).
+#
+#  Deliberately minimal. Everything else the lab needs — the origin server,
+#  the JSON-lines logger, the offline resolver, the charging meter — is
+#  standard library, so there is very little to audit and nothing to keep
+#  patched beyond these two.
+# =============================================================================
+
+# The interception proxy. Provides `mitmdump`, which loads classifier_naive.py
+# and detector.py as addons, and the hooks they use: `request`, `response`,
+# and `tls_clienthello` (the TLS ClientHello hook is what exposes the SNI, so
+# a version new enough to have it is required).
+mitmproxy>=11,<13
+
+# Used directly by local_test_server.py to mint the throwaway self-signed
+# certificate for the lab origin's HTTPS listeners. It arrives as a mitmproxy
+# dependency anyway, but this file imports it explicitly, so it is pinned here
+# explicitly rather than relied on transitively.
+cryptography>=42

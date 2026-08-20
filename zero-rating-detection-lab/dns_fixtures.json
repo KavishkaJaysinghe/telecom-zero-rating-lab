@@ -1,0 +1,43 @@
+{
+  "_comment": [
+    "LAB / EDUCATIONAL - offline DNS fixture for zero-rating-detection-lab.",
+    "",
+    "This file replaces the DNS resolver when lab_config.RESOLVER_MODE == 'fixture'",
+    "(the default). It exists so the lab is fully self-contained and deterministic:",
+    "running the demo emits ZERO DNS queries and depends on nothing outside this",
+    "machine.",
+    "",
+    "None of these are real published addresses. Every entry is either loopback or",
+    "an RFC 5737 documentation prefix (192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24)",
+    "which is reserved for exactly this purpose and is not routed on the Internet.",
+    "",
+    "LAB TOPOLOGY:",
+    "  127.0.0.2  = where the lab origin serves the GENUINE zero-rated service.",
+    "               In the fixtures below it stands in for 'the nearest CDN edge",
+    "               that this subscriber's resolver would have returned'.",
+    "  127.0.0.1  = where the lab origin serves ordinary chargeable content, and",
+    "               where the spoofing client actually connects while claiming to",
+    "               be talking to a zero-rated host.",
+    "",
+    "The extra documentation addresses on each zero-rated host are not decoration:",
+    "they make each entry a MULTI-ADDRESS set, which is what forces the detector to",
+    "compare against a full resolved set rather than a single 'the' IP. That is the",
+    "primary false-positive control for CDN-hosted services."
+  ],
+
+  "zoom.us": ["127.0.0.2", "203.0.113.10", "203.0.113.11", "203.0.113.12"],
+  "api.zoom.us": ["127.0.0.2", "203.0.113.40"],
+  "teams.microsoft.com": ["127.0.0.2", "198.51.100.20", "198.51.100.21"],
+  "edu.lab-origin.local": ["127.0.0.2"],
+
+  "lab-origin.local": ["127.0.0.1"],
+  "cdn.lab-origin.local": ["127.0.0.1", "192.0.2.50"],
+
+  "_unresolvable_note": [
+    "Any hostname NOT listed above resolves to an empty set. If such a host is",
+    "also on the zero-rating whitelist, the detector returns",
+    "ZERO_RATING_UNVERIFIABLE at LOW confidence and ALLOWS the flow - it never",
+    "treats 'I could not resolve this' as evidence of fraud. Add",
+    "'unverifiable.zoom.us' to ZERO_RATED_HOSTS-adjacent traffic to see that path."
+  ]
+}
